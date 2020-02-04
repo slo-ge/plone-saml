@@ -6,12 +6,12 @@ from abc import ABCMeta, abstractmethod
 
 import requests
 from saml2 import samlp
-from utils import xmlsec_path
+import six
+
+from poi.pas.saml2.poiutils.utils import xmlsec_path
 
 
-class SettingsFactory(object):
-    __metaclass__ = ABCMeta
-
+class SettingsFactory(six.with_metaclass(ABCMeta, object)):
     def prod_IdpSettings(self, request, xmlstr):
         idp_settings_prod = {
             "entityid": self.get_entityid(xmlstr),

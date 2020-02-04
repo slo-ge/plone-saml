@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from plone import api
-from poi.pas.saml2.interfaces import _GROUP_ATTRIBUTE
-from zope.component import getUtility
-from interfaces import ISaml2RightsManager
-
 import logging
 
+from poi.pas.saml2.interfaces import ISaml2RightsManager
+from poi.pas.saml2.interfaces import _GROUP_ATTRIBUTE
+from zope.component import getUtility
+
+from plone import api
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +47,7 @@ def _groups_brains():
         found.update(brain.getId)
         yield brain
 
+
 def group_ids(plugin):
     result = []
     manager = get_saml2rightsManager()
@@ -71,7 +72,6 @@ def group_infos(plugin):
 
 
 def group_info(plugin, group_id):
-
     if not group_id:
         return None
 
@@ -92,6 +92,7 @@ def group_info(plugin, group_id):
         brain = brains[0]
         return _make_record(brain, postfix)
     return None
+
 
 def get_saml2rightsManager():
     return getUtility(ISaml2RightsManager)
